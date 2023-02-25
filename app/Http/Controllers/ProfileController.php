@@ -6,6 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -68,5 +69,12 @@ class ProfileController extends Controller
     public function show(){
 
         return view('settings');
+    }
+
+    public function userProfile($username){
+
+        $user = User::where('username', $username)->first();
+
+        return view('user-profile', compact('user'));
     }
 }

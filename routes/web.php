@@ -18,6 +18,7 @@ Route::get('/gallery', function () { return view('jahari.gallery'); })->name('ga
 
 Route::get('/dash', function () { return view('dash');})->name('dash');
 Route::get('/courses', [CategoriesController::class, 'categories'])->name('categories');
+Route::get('/@{username}', [ProfileController::class, 'userProfile'])->where('username', '[A-Za-z0-9_]+')->name('user-profile');
 Route::get('/subscribe', [SubscribeController::class, 'subscribe'])->name('subscribe');
 Route::get('/notes', [NotesController::class, 'show'])->name('notes');
 /* Route::get('/settings', [ProfileController::class, 'show'])->name('settings'); */
