@@ -14,4 +14,8 @@ class CourseCompleted extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['id', 'course_id', 'user_id'];
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }

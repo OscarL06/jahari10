@@ -69,4 +69,8 @@ class User extends Authenticatable
     public function practice() {
         return $this->hasMany(Practice::class)->orderBy('created_at');
     }
+
+    public function coursesCompleted() {
+        return $this->hasMany(CourseCompleted::class)->orderBy('created_at');
+    }
 }
