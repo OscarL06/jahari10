@@ -73,4 +73,12 @@ class User extends Authenticatable
     public function coursesCompleted() {
         return $this->hasMany(CourseCompleted::class)->orderBy('created_at');
     }
+
+    public function lessonsCompleted() {
+        return $this->hasMany(Progress::class)->where('completed', 1)->orderBy('created_at');
+    }
+
+    public function lessonInProgress() {
+        return $this->hasOne(Progress::class)->where('completed', 0);
+    }
 }

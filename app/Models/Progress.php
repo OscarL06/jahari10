@@ -16,4 +16,8 @@ class Progress extends Model
         'time',
         'completed'
     ];
+
+    public function material(){
+        return $this->belongsTo(Material::class);
+    }
 }
