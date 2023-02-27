@@ -12,7 +12,48 @@
             </p>
         </div>
 
-        <div class="flex flex-col">
+        <section class="w-full mt-8">
+            <div class="flex items-start justify-around w-4/5">
+                <div class="">
+                    <img class="rounded-full w-44 h-44" src="/storage/{{ $user->profile_photo_path }}" alt="User Avatar">
+                </div>
+                
+                <div class="flex flex-col">
+                    <div class="flex items-center">
+                        <h1 class="text-5xl">{{ $user->username }}</h1>
+                        <button class="px-4 ml-2 text-sm text-white rounded-md bg-main">Follow</button>
+                    </div>
+
+                    <div>
+                        <p class="text-lg ">100 friends</p>
+
+                        <p class="mt-4 text-xl">{{ $user->name }}</p>
+                        <div class="text-xl">
+                            <a href="">wwww.oscar.com</a>
+                        </div>
+                        <p class="w-80">
+                            Lorem ipsum dolor sit, consectetur adipisicing elit. Autem dignissimos ex 
+                            doloremque commodi veniam accusamus laudantium sit quos laborum saepe, nam, 
+                            incidunt quaerat id error.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-3/4">
+            <div class="py-4 mt-8 border shadow border-purple-50 rounded-xl">
+                @forelse ($user->coursesCompleted as $course)
+                    <div class="flex flex-col items-center">
+                        <img class="w-20 h-20 rounded-full" src="{{ $course->course->image }}" alt="Course Image">
+                        <p>{{ $course->course->name }}</p>
+                    </div>
+                @empty
+                    <p>No completed courses</p>   
+                @endforelse
+            </div>
+        </section>
+        {{-- <div class="flex flex-col">
             <h1 class="mt-2 text-6xl tracking-tight">{{ $user->name }}</h1>
             <h2 class="text-sm"><span>@</span>{{ $user->username }}</h2>
         </div>
@@ -21,7 +62,7 @@
             <div class="w-1/4">
                 <div class="flex flex-col py-2 space-x-2 rounded-md shadow">
                     <div class="flex justify-between px-4">
-                        <p>100 followers</p>
+                        <p>100 friends</p>
                         <button class="px-4 text-white rounded-md bg-main hover:opacity-90">Follow</button>
                     </div>
 
@@ -86,10 +127,10 @@
                     </h3>
                     <div class="p-3 py-2 rounded-md shadow">
                         @if(!is_null($user->lessonsInProgress))
-                             @foreach ($user->lessonsCompleted as $lesson)
+                             @foreach ($user->lessonsInProgress as $progress)
                                 <li class="marker:text-purple-700">
-                                    {{ $lesson->material->name }} - 
-                                    <span class="text-sm">{{ $lesson->material->type }}</span>
+                                    {{ $progress->material->name }} - 
+                                    <span class="text-sm">{{ $progress->material->type }}</span>
                                 </li>
                             @endforeach
                         @else
@@ -97,7 +138,7 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="w-3/4">
 

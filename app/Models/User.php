@@ -78,7 +78,7 @@ class User extends Authenticatable
         return $this->hasMany(Progress::class)->where('completed', 1)->orderBy('created_at');
     }
 
-    public function lessonInProgress() {
-        return $this->hasOne(Progress::class)->where('completed', 0);
+    public function lessonsInProgress() {
+        return $this->hasMany(Progress::class)->whereNull('completed');
     }
 }
