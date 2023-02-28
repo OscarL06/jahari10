@@ -2,6 +2,21 @@
 
 @section('title', 'Settings | ' . Auth::user()->username)
 
+ <style>
+     #progress {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      margin: 0 auto;
+    }
+    #progress img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+
 @section('content')
     <div class="w-full lg:w-4/5 flex flex-col items-center lg:ml-[22%] font-abel mb-5">
 
@@ -42,10 +57,13 @@
         </section>
 
         <section class="w-3/4">
-            <div class="py-4 mt-8 border shadow border-purple-50 rounded-xl">
+            <div class="py-4 mt-8">
                 @forelse ($user->coursesCompleted as $course)
                     <div class="flex flex-col items-center">
-                        <img class="w-20 h-20 rounded-full" src="{{ $course->course->image }}" alt="Course Image">
+              <div id="progress" data-progress="0.5">
+    <img src="{{ $course->course->image }}" class="rounded-full h-14 w-14" alt="Course Image">
+  </div>
+                        
                         <p>{{ $course->course->name }}</p>
                     </div>
                 @empty
@@ -53,6 +71,8 @@
                 @endforelse
             </div>
         </section>
+
+       
         {{-- <div class="flex flex-col">
             <h1 class="mt-2 text-6xl tracking-tight">{{ $user->name }}</h1>
             <h2 class="text-sm"><span>@</span>{{ $user->username }}</h2>
@@ -148,3 +168,21 @@
 
     <x-back-button backUrl="{{ route('dash') }}" class="top-4 right-4"/>    
 @endsection
+
+<script src="/js/progressbar.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+        var progress = parseFloat(document.getElementById('progress').getAttribute('data-progress'));
+      var progressBar = new ProgressBar.Circle('#progress', {
+        strokeWidth: 6,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#9333ea',
+        trailColor: '#eee',
+        trailWidth: 1,
+        svgStyle: null
+      });
+
+      progressBar.animate(progress);
+    });
+  </script>
