@@ -6,7 +6,7 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\User;
+use App\Models\{User, Course};
 
 class ProfileController extends Controller
 {
@@ -75,6 +75,8 @@ class ProfileController extends Controller
 
         $user = User::where('username', $username)->first();
 
-        return view('user-profile', compact('user'));
+        $courses = $user->lessonsCompleted->pluck('material.course')->unique();
+
+        return view('user-profile', compact('user', 'courses'));
     }
 }
