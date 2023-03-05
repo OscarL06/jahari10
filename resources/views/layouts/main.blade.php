@@ -185,6 +185,7 @@
 
     @livewire('practice-modal')
 
+    @yield('js')
     <script src="/js/practice.js"></script>
 
      @stack('modals')
